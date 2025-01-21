@@ -4,14 +4,14 @@ import { SidebarLeft, SidebarRight } from "../../components";
 
 const Public = () => {
     return (
-        <div className="w-full flex overflow-y-auto">
-            <div className="w-[240px] flex-none border border-blue-500">
+        <div className="w-full flex ">
+            <div className="w-[240px] flex-none bg-[#F2F2F2]">
                 <SidebarLeft />
             </div>
-            <div className="flex-auto border border-red-500">
+            <div className="flex-auto">
                 <Outlet />
             </div>
-            <div className="w-[329px] flex-none border border-green-500">
+            <div className="w-[240px] flex-none bg-[#F2F2F2] border border-green-500">
                 <SidebarRight />
             </div>
         </div>
