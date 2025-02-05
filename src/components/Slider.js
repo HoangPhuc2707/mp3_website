@@ -35,9 +35,12 @@ const Slider = () => {
         if (item?.type === 1) {
             dispatch(actions.setCurSongId(item.encodeId))
             dispatch(actions.play(true))
+            dispatch(actions.setPlaylist(null))
         } else if (item?.type === 4) {
             const albumPath = item?.link?.split('.')[0]
             navigate(albumPath)
+        } else {
+            dispatch(actions.setPlaylist(null))
         }
     }
 
@@ -49,7 +52,7 @@ const Slider = () => {
                         key={item.encodeId}
                         src={item.banner}
                         onClick={() => handleClickBanner(item)}
-                        className={`slider-item flex-1 object-contain w-full rounded-md ${index == 0 ? 'block' : 'hidden'}`}
+                        className={`slider-item flex-1 object-contain w-full rounded-md ${index === 0 ? 'block' : 'hidden'}`}
                         alt='img-banner' />
                 )
             })}
