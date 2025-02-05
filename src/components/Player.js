@@ -6,7 +6,7 @@ import icons from '../ultis/icons'
 const { AiFillHeart, AiOutlineHeart, BsThreeDots, MdSkipNext, MdSkipPrevious,
     CiRepeat, CiShuffle, BsFillPlayFill, BsPauseFill } = icons
 const Player = () => {
-    const audioEl = new Audio('https://a128-z3.zmdcdn.me/f053817b88bac84042114b1c7cafc5c9?authen=exp=1738056014~acl=/f053817b88bac84042114b1c7cafc5c9*~hmac=0138956652baa7ad0b281a38b7d7a024')
+    const audioEl = new Audio()
     const { curSongId, isPlaying } = useSelector(state => state.music)
     const [songInfo, setSongInfo] = useState(null)
     const [source, setSource] = useState(null)
@@ -15,8 +15,8 @@ const Player = () => {
     useEffect(() => {
         const fetchDetailSong = async () => {
             const [res1, res2] = await Promise.all([
-                apis.getDetailSong(curSongId),
-                apis.getSong(curSongId)
+                apis.apiGetDetailSong(curSongId),
+                apis.apiGetSong(curSongId)
             ])
             if (res1.data.err === 0) {
                 setSongInfo(res1.data.data)

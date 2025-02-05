@@ -4,9 +4,6 @@ import { Header, Slider } from "../../components";
 const Home = () => {
     return (
         <div className='overflow-y-auto w-full'>
-            <div className='h-[70px] px-[59px] bg-[#FFFFFF] flex items-center'>
-                <Header />
-            </div>
             <Slider />
         </div>
     )
