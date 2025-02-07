@@ -7,7 +7,7 @@ import moment from 'moment'
 import { toast } from 'react-toastify'
 
 const { AiFillHeart, AiOutlineHeart, BsThreeDots, MdSkipNext, MdSkipPrevious,
-    CiRepeat, CiShuffle, BsFillPlayFill, BsPauseFill } = icons
+    CiRepeat, CiShuffle, BsFillPlayFill, BsPauseFill, TbRepeatOnce } = icons
 var intervalId
 const Player = () => {
     const { curSongId, isPlaying, songs } = useSelector(state => state.music)
@@ -15,6 +15,7 @@ const Player = () => {
     const [audio, setAudio] = useState(new Audio())
     const [curSeconds, setCurSeconds] = useState(0)
     const [isShuffe, setIsShuffe] = useState(false)
+    const [repeatMode, setRepeatMode] = useState(0)
     const dispatch = useDispatch()
     const thumbRef = useRef()
     const trackRef = useRef()
@@ -47,7 +48,7 @@ const Player = () => {
         intervalId && clearInterval(intervalId)
         audio.pause()
         audio.load()
-        if (isPlaying) {
+        if (isPlaying && thumbRef.current) {
             audio.play()
             intervalId = setInterval(() => {
                 let percent = Math.round(audio.currentTime * 10000 / songInfo.duration) / 100
@@ -56,6 +57,24 @@ const Player = () => {
             }, 200)
         }
     }, [audio])
+
+    useEffect(() => {
+        const handleEnded = () => {
+            if (isShuffe) {
+                handleShuffle()
+            } else if (repeatMode) {
+                repeatMode === 1 ? handleRepeat() : handleNextSong()
+            } else {
+                audio.pause()
+                dispatch(actions.play(false))
+            }
+        }
+        audio.addEventListener('ended', handleEnded)
+
+        return () => {
+            audio.removeEventListener('ended', handleEnded)
+        }
+    }, [audio, isShuffe, repeatMode])
 
     const handleTogglePlayMusic = () => {
         if (isPlaying) {
@@ -97,7 +116,15 @@ const Player = () => {
         }
     }
 
+    const handleRepeat = () => {
+        audio.play()
+    }
 
+    const handleShuffle = () => {
+        const randomIndex = Math.round(Math.random() * songs.length) - 1
+        dispatch(actions.setCurSongId(songs[randomIndex].encodeId))
+        dispatch(actions.play(true))
+    }
 
     return (
         <div className='bg-main-100 px-5 h-full flex border-t border-solid border-[#e8e8e8]'>
@@ -123,13 +150,19 @@ const Player = () => {
                     </span>
                     <span onClick={handlePrevSong} className={`${!songs ? 'text-gray-500' : 'cursor-pointer'}`}><MdSkipPrevious size={23} /></span>
                     <span
-                        className='p-1 cursor-pointer border border-gray-700 hover:text-main-500 rounded-full'
+                        className='p-1 cursor-pointer border border-gray-700 hover:text-purple-600 rounded-full'
                         onClick={handleTogglePlayMusic}
                     >
                         {isPlaying ? <BsPauseFill size={24} /> : <BsFillPlayFill size={24} />}
                     </span>
                     <span onClick={handleNextSong} className={`${!songs ? 'text-gray-500' : 'cursor-pointer'}`}><MdSkipNext size={23} /></span>
-                    <span className='cursor-pointer' title='Bật phát lại tất cả'><CiRepeat size={20} /></span>
+                    <span
+                        className={`cursor-pointer ${repeatMode && 'text-purple-600'}`}
+
+                        onClick={() => setRepeatMode(prev => prev === 2 ? 0 : prev + 1)}
+                    >
+                        {repeatMode === 1 ? <TbRepeatOnce size={20} title='Bật phát lại một bài' /> : <CiRepeat size={20} title='Bật phát lại tất cả' />}
+                    </span>
                 </div>
                 <div className='w-full flex items-center justify-center gap-3 text-xs'>
                     <span>{moment.utc(curSeconds * 1000).format('mm:ss')}</span>
