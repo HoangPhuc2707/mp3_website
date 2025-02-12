@@ -5,27 +5,33 @@ import icons from '../ultis/icons'
 import * as actions from '../store/actions'
 import moment from 'moment'
 import { toast } from 'react-toastify'
+import { LoadingSong } from './'
 
 const { AiFillHeart, AiOutlineHeart, BsThreeDots, MdSkipNext, MdSkipPrevious,
-    CiRepeat, CiShuffle, BsFillPlayFill, BsPauseFill, TbRepeatOnce } = icons
+    CiRepeat, CiShuffle, BsFillPlayFill, BsPauseFill, TbRepeatOnce, BsMusicNoteList,
+    SlVolume1, SlVolume2, SlVolumeOff } = icons
 var intervalId
-const Player = () => {
+const Player = ({ setIsShowRightSidebar }) => {
     const { curSongId, isPlaying, songs } = useSelector(state => state.music)
     const [songInfo, setSongInfo] = useState(null)
     const [audio, setAudio] = useState(new Audio())
     const [curSeconds, setCurSeconds] = useState(0)
     const [isShuffe, setIsShuffe] = useState(false)
     const [repeatMode, setRepeatMode] = useState(0)
+    const [isLoadingSource, setIsLoadingSource] = useState(false)
+    const [volume, setVolume] = useState(100)
     const dispatch = useDispatch()
     const thumbRef = useRef()
     const trackRef = useRef()
 
     useEffect(() => {
         const fetchDetailSong = async () => {
+            setIsLoadingSource(false)
             const [res1, res2] = await Promise.all([
                 apis.apiGetDetailSong(curSongId),
                 apis.apiGetSong(curSongId)
             ])
+            setIsLoadingSource(true)
             if (res1.data.err === 0) {
                 setSongInfo(res1.data.data)
             }
@@ -75,6 +81,10 @@ const Player = () => {
             audio.removeEventListener('ended', handleEnded)
         }
     }, [audio, isShuffe, repeatMode])
+
+    useEffect(() => {
+        audio.volume = volume / 100
+    }, [volume])
 
     const handleTogglePlayMusic = () => {
         if (isPlaying) {
@@ -139,7 +149,7 @@ const Player = () => {
                     <span><BsThreeDots size={16} /></span>
                 </div>
             </div>
-            <div className='w-[40%] flex-auto border border-red-500 flex flex-col gap-2 items-center justify-center py-2'>
+            <div className='w-[40%] flex-auto flex flex-col gap-2 items-center justify-center py-2'>
                 <div className='flex gap-6 justify-center items-center'>
                     <span
                         className={`cursor-pointer ${isShuffe && 'text-purple-600'}`}
@@ -153,7 +163,7 @@ const Player = () => {
                         className='p-1 cursor-pointer border border-gray-700 hover:text-purple-600 rounded-full'
                         onClick={handleTogglePlayMusic}
                     >
-                        {isPlaying ? <BsPauseFill size={24} /> : <BsFillPlayFill size={24} />}
+                        {!isLoadingSource ? <LoadingSong /> : isPlaying ? <BsPauseFill size={24} /> : <BsFillPlayFill size={24} />}
                     </span>
                     <span onClick={handleNextSong} className={`${!songs ? 'text-gray-500' : 'cursor-pointer'}`}><MdSkipNext size={23} /></span>
                     <span
@@ -176,8 +186,27 @@ const Player = () => {
                     <span>{moment.utc(songInfo?.duration * 1000).format('mm:ss')}</span>
                 </div>
             </div>
-            <div className='w-[30%] flex-auto border border-red-500'>
-                volume
+            <div className='w-[30%] flex-auto flex items-center justify-end gap-8'>
+                <div className='flex items-center gap-2'>
+                    <span className='cursor-pointer' onClick={() => setVolume(prev => +prev === 0 ? 70 : 0)}>
+                        {+volume >= 50 ? <SlVolume2 /> : +volume === 0 ? <SlVolumeOff /> : <SlVolume1 />}
+                    </span>
+                    <input
+                        type='range'
+                        className='w-[100px] h-[3px] cursor-pointer'
+                        step={1}
+                        min={0}
+                        max={100}
+                        value={volume}
+                        onChange={(e) => setVolume(e.target.value)}
+                    />
+                </div>
+                <span
+                    className='p-1 rounded-sm cursor-pointer text-white bg-purple-700 opacity-90 hover:opacity-100 '
+                    onClick={() => setIsShowRightSidebar(prev => !prev)}
+                >
+                    <BsMusicNoteList size={15} />
+                </span>
             </div>
         </div>
     )

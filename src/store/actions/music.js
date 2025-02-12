@@ -21,6 +21,10 @@ export const setPlaylist = (songs) => ({
     songs: songs
 })
 
+export const setLoading = (flag) => ({
+    type: actionTypes.LOADING,
+    flag: flag
+})
 // export const fetchDetailPlaylist = (pid) => async (dispatch) => {
 //     try {
 //         const response = await apis.apiGetDetailPlaylist(pid)

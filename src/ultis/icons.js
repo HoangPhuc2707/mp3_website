@@ -5,9 +5,10 @@ import { RiChatFollowUpLine } from "react-icons/ri";
 import { AiOutlineArrowLeft, AiOutlineArrowRight, AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { HiArrowNarrowLeft, HiArrowNarrowRight } from "react-icons/hi";
 import { FiSearch } from "react-icons/fi";
-import { BsThreeDots, BsFillPlayFill, BsPauseFill, BsMusicNoteBeamed, BsDot } from "react-icons/bs";
+import { BsThreeDots, BsFillPlayFill, BsPauseFill, BsMusicNoteBeamed, BsDot, BsMusicNoteList } from "react-icons/bs";
 import { CiRepeat, CiShuffle } from "react-icons/ci";
 import { TbRepeatOnce } from "react-icons/tb"
+import { SlVolumeOff, SlVolume2, SlVolume1 } from "react-icons/sl"
 
 const icons = {
     MdOutlineLibraryMusic,
@@ -30,7 +31,11 @@ const icons = {
     BsPauseFill,
     BsMusicNoteBeamed,
     BsDot,
-    TbRepeatOnce
+    TbRepeatOnce,
+    BsMusicNoteList,
+    SlVolumeOff,
+    SlVolume2,
+    SlVolume1
 }
 
 export default icons

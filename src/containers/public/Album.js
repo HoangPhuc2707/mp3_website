@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import * as apis from '../../apis'
 import moment from 'moment'
 import { Lists, AudioLoading } from '../../components'
@@ -10,14 +10,17 @@ import icons from '../../ultis/icons'
 
 const { BsFillPlayFill } = icons
 const Album = () => {
+    const location = useLocation()
     const { pid } = useParams()
-    const { curSongId, isPlaying, songs } = useSelector(state => state.music)
+    const { isPlaying } = useSelector(state => state.music)
     const [playlistData, setPlaylistData] = useState()
     const dispatch = useDispatch()
 
     useEffect(() => {
         const fetchDetailPlaylist = async () => {
+            dispatch(actions.setLoading(true))
             const response = await apis.apiGetDetailPlaylist(pid)
+            dispatch(actions.setLoading(false))
             if (response?.data?.err === 0) {
                 setPlaylistData(response?.data?.data)
                 dispatch(actions.setPlaylist(response?.data?.data?.song?.items))
@@ -26,10 +29,18 @@ const Album = () => {
         fetchDetailPlaylist()
     }, [pid])
 
+    useEffect(() => {
+        if (location.state?.playAlbum) {
+            const randomSong = Math.round(Math.random() * playlistData?.song?.items?.length) - 1
+            dispatch(actions.setCurSongId(playlistData?.song?.items[randomSong]?.encodeId))
+            dispatch(actions.play(true))
+        }
+    }, [pid, playlistData])
+
     return (
 
         <div className='flex gap-8 w-full h-full px-[39px]'>
-            <div className='flex-none w-1/3 border border-red-500 flex flex-col gap-2 items-center'>
+            <div className='flex-none w-1/3 flex flex-col gap-2 items-center'>
                 <div className='w-full relative overflow-hidden'>
                     <img
                         src={playlistData?.thumbnailM}
@@ -52,7 +63,7 @@ const Album = () => {
                     <span className='text-gray-600 text-xs'>{`${Math.round(playlistData?.like / 1000)}K người yêu thích`}</span>
                 </div>
             </div>
-            <Scrollbars style={{ width: '100%', height: '80%' }}>
+            <Scrollbars autoHide style={{ width: '100%', height: '80%' }}>
                 <div className='flex-auto mb-20'>
                     <span>
                         <span className='text-gray-600 text-sm'>Lời tựa </span>
