@@ -13,7 +13,7 @@ const commonConfig = {
 const musicConfig = {
     ...commonConfig,
     key: 'music',
-    whilelist: ['curSongId']
+    whilelist: ['curSongId', 'curSongData', 'curAlbumId', 'recentSongs']
 }
 
 const rootReducer = combineReducers({

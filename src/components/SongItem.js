@@ -4,13 +4,14 @@ import 'moment/locale/vi'
 import { useDispatch } from 'react-redux'
 import * as actions from '../store/actions'
 
-const SongItem = ({ thumbnail, title, artists, releaseDate, sid, order, percent, style }) => {
+const SongItem = ({ thumbnail, title, artists, releaseDate, sid, order, percent, style, small }) => {
     const dispatch = useDispatch()
     return (
         <div
             onClick={() => {
                 dispatch(actions.setCurSongId(sid))
                 dispatch(actions.play(true))
+                dispatch(actions.setRecent({ thumbnail, title, sid, artists }))
             }}
             className={`w-full flex justify-between items-center p-[10px] gap-[10px] hover:bg-main-200 rounded-md cursor-pointer ${style || 'text-black hover:bg-main-200'}`}
         >
@@ -21,7 +22,7 @@ const SongItem = ({ thumbnail, title, artists, releaseDate, sid, order, percent,
                         {order}
                     </span>
                 }
-                <img src={thumbnail} alt='thumbnail' className='w-[60px] h-[60px] object-cover rounded-md' />
+                <img src={thumbnail} alt='thumbnail' className={`${small ? 'w-[40px] h-[40px]' : 'w-[60px] h-[60px]'} object-cover rounded-md`} />
                 <div className='flex flex-col gap-1'>
                     <span className='text-sm font-semibold'>
                         {title?.length > 20 ? `${title?.slice(0, 20)}...` : title}

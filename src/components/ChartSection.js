@@ -107,6 +107,7 @@ const ChartSection = () => {
                         {rank?.slice(0, 3)?.map((item, index) => {
                             return (
                                 <SongItem
+                                    key={item.encodeId}
                                     thumbnail={item.thumbnail}
                                     title={item.title}
                                     artists={item.artistsNames}
