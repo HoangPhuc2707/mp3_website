@@ -4,7 +4,7 @@ import 'moment/locale/vi'
 import { useDispatch } from 'react-redux'
 import * as actions from '../store/actions'
 
-const SongItem = ({ thumbnail, title, artists, releaseDate, sid, order, percent, style, small }) => {
+const SongItem = ({ thumbnail, title, artists, releaseDate, sid, order, percent, style, size }) => {
     const dispatch = useDispatch()
     return (
         <div
@@ -22,7 +22,7 @@ const SongItem = ({ thumbnail, title, artists, releaseDate, sid, order, percent,
                         {order}
                     </span>
                 }
-                <img src={thumbnail} alt='thumbnail' className={`${small ? 'w-[40px] h-[40px]' : 'w-[60px] h-[60px]'} object-cover rounded-md`} />
+                <img src={thumbnail} alt='thumbnail' className={`${size || 'w-[60px] h-[60px]'} object-cover rounded-md`} />
                 <div className='flex flex-col gap-1'>
                     <span className='text-sm font-semibold'>
                         {title?.length > 20 ? `${title?.slice(0, 20)}...` : title}

@@ -2,13 +2,14 @@ import { MdOutlineLibraryMusic, MdSkipNext, MdSkipPrevious } from "react-icons/m
 import { TbChartArcs } from "react-icons/tb";
 import { FaRegChartBar } from "react-icons/fa";
 import { RiChatFollowUpLine, RiDeleteBinFill } from "react-icons/ri";
-import { AiOutlineArrowLeft, AiOutlineArrowRight, AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineArrowLeft, AiOutlineArrowRight, AiFillHeart, AiOutlineHeart, AiOutlineUserAdd } from "react-icons/ai";
 import { HiArrowNarrowLeft, HiArrowNarrowRight } from "react-icons/hi";
 import { FiSearch } from "react-icons/fi";
 import { BsThreeDots, BsFillPlayFill, BsPauseFill, BsMusicNoteBeamed, BsDot, BsMusicNoteList } from "react-icons/bs";
 import { CiRepeat, CiShuffle } from "react-icons/ci";
 import { TbRepeatOnce } from "react-icons/tb"
 import { SlVolumeOff, SlVolume2, SlVolume1 } from "react-icons/sl"
+import { GrClose } from "react-icons/gr"
 
 const icons = {
     MdOutlineLibraryMusic,
@@ -36,7 +37,9 @@ const icons = {
     SlVolumeOff,
     SlVolume2,
     SlVolume1,
-    RiDeleteBinFill
+    RiDeleteBinFill,
+    AiOutlineUserAdd,
+    GrClose
 }
 
 export default icons

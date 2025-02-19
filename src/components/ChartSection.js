@@ -98,7 +98,7 @@ const ChartSection = () => {
             <img src={bgChart} alt='bg-chart' className='w-full object-cover rounded-md max-h-[400px]' />
             <div className='absolute z-10 top-0 left-[59px] right-[59px] bottom-0 bg-[rgba(77,34,104,0.9)] rounded-md'></div>
             <div className='absolute z-20 top-0 left-[59px] right-[59px] bottom-0 p-5 flex flex-col gap-4'>
-                <Link to={path.ZING_CHART} className='flex gap-2 items-center'>
+                <Link to={path.ZING_CHART} className='w-[160px] flex gap-2 items-center'>
                     <h3 className='text-2xl gradient-text font-bold'>#zingchart</h3>
                     <span className='p-1 rounded-full bg-white hover:bg-main-300'><BsFillPlayFill size={16} /></span>
                 </Link>

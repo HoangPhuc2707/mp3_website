@@ -46,7 +46,7 @@ const SectionItem = ({ data, link, title, thumbnailM, artistsNames, sortDescript
             </div>
 
             <span className='flex flex-col'>
-                <span className='font-semibold'>{title.length > 30 ? `${title?.slice(0, 30)}...` : title}</span>
+                <span className='font-semibold'>{title.length > 25 ? `${title?.slice(0, 25)}...` : title}</span>
                 {data?.sectionId === 'h100' || data?.sectionId === 'hAlbum' ?
                     <span>{artistsNames}</span>
                     :

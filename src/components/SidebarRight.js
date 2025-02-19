@@ -61,7 +61,7 @@ const SidebarRight = () => {
                                         title={item?.title}
                                         artists={item?.artists}
                                         sid={item?.sid}
-                                        small
+                                        size='w-[40px] h-[40px]'
                                     />
                                 )
                             })}
@@ -76,7 +76,7 @@ const SidebarRight = () => {
                             title={curSongData?.title}
                             artists={curSongData?.artistsNames}
                             sid={curSongData?.encodeId}
-                            small
+                            size='w-[40px] h-[40px]'
                             style='bg-main-500 hover:!bg-[#0c6b6b] text-white'
                         />
                         <div className='flex flex-col text-black pt-[10px] px-2 pb-[5px]'>
@@ -97,7 +97,7 @@ const SidebarRight = () => {
                                         title={item?.title}
                                         artists={item?.artistsNames}
                                         sid={item?.encodeId}
-                                        small
+                                        size='w-[40px] h-[40px]'
                                     />
                                 )
                             })}
