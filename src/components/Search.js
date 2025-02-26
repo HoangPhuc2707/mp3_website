@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import icons from '../ultis/icons'
 import * as actions from '../store/actions'
-import { createSearchParams, useNavigate } from 'react-router-dom'
+import { createSearchParams, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import path from '../ultis/path'
 
@@ -9,6 +9,7 @@ const { FiSearch, GrClose } = icons
 const Search = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const { singer } = useParams()
     const [keyword, setKeyword] = useState('')
 
     const handleSearch = async (e) => {
@@ -32,12 +33,12 @@ const Search = () => {
                 >
                     <GrClose className='text-gray-400' />
                 </span>}
-            <span className='h-10 pl-4 bg-[#efefef] flex items-center justify-between rounded-l-[20px] text-gray-500'>
+            <span className={`h-10 pl-4 ${singer ? 'bg-[rgba(0,0,0,0.1)]' : 'bg-[#efefef]'} flex items-center justify-between rounded-l-[20px] text-gray-500`}>
                 <FiSearch size={24} />
             </span>
             <input
                 type='text'
-                className='outline-none bg-[#efefef] w-full h-10 px-4 py-2 rounded-r-[20px] text-gray-500 text-[15px]'
+                className={`outline-none ${singer ? 'bg-[rgba(0,0,0,0.1)]' : 'bg-[#efefef]'} w-full h-10 px-4 py-2 rounded-r-[20px] text-gray-500 text-[15px]`}
                 placeholder='Tìm kiếm bài hát, nghệ sĩ, lời bài hát...'
                 value={keyword}
                 onChange={e => setKeyword(e.target.value)}

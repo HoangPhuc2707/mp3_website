@@ -10,7 +10,7 @@ const Section = ({ data }) => {
                 <h3 className='text-xl font-bold'>{data?.title}</h3>
                 <span className='text-xs font-semibold text-gray-500 cursor-pointer'>TẤT CẢ</span>
             </div>
-            <div className='flex items-start justify-between gap-7'>
+            <div className='flex'>
                 {data && data?.items?.length > 0 && data.items.slice(0, 4).map(item => {
                     return (
                         <SectionItem
@@ -20,6 +20,7 @@ const Section = ({ data }) => {
                             link={item.link}
                             sortDescription={item.sortDescription}
                             thumbnailM={item.thumbnailM}
+                            size='w-[24%]'
                         />
                     )
                 })}

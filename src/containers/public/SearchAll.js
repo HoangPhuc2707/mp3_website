@@ -5,7 +5,6 @@ import { SongItem, List, SectionItem, Artist } from '../../components'
 
 const SearchAll = () => {
     const { searchData } = useSelector(state => state.music)
-    console.log(searchData)
     return (
         <div className='w-full flex flex-col px-[60px] gap-8'>
             <div className='flex flex-col'>
@@ -50,14 +49,14 @@ const SearchAll = () => {
                 <div className='flex flex-wrap w-full'>
                     {searchData?.songs?.slice(0, 8)?.map((item, index) => (
                         <div key={item.encodeId} className={`flex-auto w-[45%] ${index % 2 !== 0 ? 'pl-4' : 'pr-4'}`} >
-                            <List songData={item} isHideAlbum />
+                            <List songData={item} isHideAlbum isHideNode />
                         </div>
                     ))}
                 </div>
             </div>
             <div className='flex flex-col w-full'>
                 <h3 className='text-lg font-bold mb-5'>Playlist/Album</h3>
-                <div className='flex items-start justify-between gap-7'>
+                <div className='flex items-start justify-between gap-4'>
                     {searchData?.playlists?.slice(0, 4)?.map(item => (
                         <SectionItem
                             key={item.encodeId}
@@ -65,6 +64,7 @@ const SearchAll = () => {
                             link={item.link}
                             sortDescription={item.sortDescription}
                             thumbnailM={item.thumbnailM}
+                            size='w-full'
                         />
                     ))}
                 </div>

@@ -26,21 +26,21 @@ const NewRelease = () => {
                 <button
                     type='button'
                     onClick={() => setIsActived(0)}
-                    className={`py-1 px-4 rounded-l-full rounded-r-full border border-gray-400 bg-transparent ${isActived === 0 && '!bg-main-500 text-white'}`}
+                    className={`py-1 px-4 rounded-l-full rounded-r-full border border-gray-400 ${isActived === 0 && '!bg-main-500 text-white'}`}
                 >
                     TẤT CẢ
                 </button>
                 <button
                     type='button'
                     onClick={() => setIsActived(1)}
-                    className={`py-1 px-4 rounded-l-full rounded-r-full border border-gray-400 bg-transparent ${isActived === 1 && '!bg-main-500 text-white'}`}
+                    className={`py-1 px-4 rounded-l-full rounded-r-full border border-gray-400 ${isActived === 1 && 'bg-main-500 text-white'}`}
                 >
                     VIỆT NAM
                 </button>
                 <button
                     type='button'
                     onClick={() => setIsActived(2)}
-                    className={`py-1 px-4 rounded-l-full rounded-r-full border border-gray-400 bg-transparent ${isActived === 2 && '!bg-main-500 text-white'}`}
+                    className={`py-1 px-4 rounded-l-full rounded-r-full border border-gray-400 ${isActived === 2 && 'bg-main-500 text-white'}`}
                 >
                     QUỐC TẾ
                 </button>

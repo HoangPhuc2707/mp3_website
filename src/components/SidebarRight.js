@@ -62,6 +62,7 @@ const SidebarRight = () => {
                                         artists={item?.artists}
                                         sid={item?.sid}
                                         size='w-[40px] h-[40px]'
+                                        style={'hover:!bg-main-300'}
                                     />
                                 )
                             })}
@@ -84,7 +85,7 @@ const SidebarRight = () => {
                             <span className='opacity-70 text-xs flex gap-1'>
                                 <span>Từ playlist</span>
                                 <span className='font-semibold text-main-500'>
-                                    {curSongData?.album?.title.length > 25 ? `${curSongData?.album?.title?.slice(0, 25)}...` : curSongData?.album?.title}
+                                    {curSongData?.album?.title.length > 20 ? `${curSongData?.album?.title?.slice(0, 20)}...` : curSongData?.album?.title}
                                 </span>
                             </span>
                         </div>
@@ -98,6 +99,7 @@ const SidebarRight = () => {
                                         artists={item?.artistsNames}
                                         sid={item?.encodeId}
                                         size='w-[40px] h-[40px]'
+                                        style={'hover:!bg-main-300'}
                                     />
                                 )
                             })}

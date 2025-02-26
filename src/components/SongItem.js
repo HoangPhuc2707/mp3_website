@@ -4,7 +4,7 @@ import 'moment/locale/vi'
 import { useDispatch } from 'react-redux'
 import * as actions from '../store/actions'
 
-const SongItem = ({ thumbnail, title, artists, releaseDate, sid, order, percent, style, size }) => {
+const SongItem = ({ thumbnail, title, artists, releaseDate, sid, order, percent, style, size, duration }) => {
     const dispatch = useDispatch()
     return (
         <div
@@ -27,11 +27,12 @@ const SongItem = ({ thumbnail, title, artists, releaseDate, sid, order, percent,
                     <span className='text-sm font-semibold'>
                         {title?.length > 20 ? `${title?.slice(0, 20)}...` : title}
                     </span>
-                    <span className='text-xs opacity-70'>{artists?.length > 30 ? `${artists?.slice(0, 30)}...` : artists}</span>
+                    <span className='text-xs opacity-70'>{artists?.length > 20 ? `${artists?.slice(0, 20)}...` : artists}</span>
                     {releaseDate && <span className='text-xs text-gray-700'>{moment(releaseDate * 1000).fromNow()}</span>}
                 </div>
             </div>
             {percent && <span className='font-bold'>{`${percent}%`}</span>}
+            {duration && <span className='text-xs'>{moment.utc(duration * 1000).format('mm:ss')}</span>}
         </div>
     )
 }

@@ -1,13 +1,25 @@
 import React, { useEffect } from "react";
-import { NewRelease, Section, Slider, ChartSection } from "../../components";
+import { NewRelease, Section, Sliders, ChartSection, SectionItem } from "../../components";
 import { useSelector } from 'react-redux'
 import { Link } from "react-router-dom";
+import Slider from "react-slick";
 
 const Home = () => {
     const { chill, top100, weekChart, albumHot } = useSelector(state => state.app)
+
+    const settings = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        autoplay: true,
+        autoplaySpeed: 2500,
+    };
     return (
         <div className='overflow-y-auto w-full'>
-            <Slider />
+            <div className="w-full h-[70px]"></div>
+            <Sliders />
             <Section data={chill} />
             <NewRelease />
             <Section data={top100} />
@@ -21,7 +33,28 @@ const Home = () => {
                     )
                 })}
             </div>
-            <Section data={albumHot} />
+            <div className='mt-12 px-[59px] flex flex-col gap-5'>
+                <div className='flex items-center'>
+                    <h3 className='text-xl font-bold'>{albumHot?.title}</h3>
+                </div>
+                <div className='w-full'>
+                    <Slider {...settings}>
+                        {albumHot && albumHot?.items?.length > 0 && albumHot.items.map(item => {
+                            return (
+                                <div key={item.encodeId} className="px-2">
+                                    <SectionItem
+                                        title={item.title}
+                                        link={item.link}
+                                        sortDescription={item.sortDescription}
+                                        thumbnailM={item.thumbnailM}
+                                        size='w-full'
+                                    />
+                                </div>
+                            )
+                        })}
+                    </Slider>
+                </div>
+            </div>
             <div className="w-full h-[500px]"></div>
         </div>
     )

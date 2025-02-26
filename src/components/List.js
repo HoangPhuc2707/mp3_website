@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import * as actions from '../store/actions'
 
 const { BsMusicNoteBeamed } = icons
-const List = ({ songData, isHideAlbum }) => {
+const List = ({ songData, isHideAlbum, isHideNode }) => {
     const dispatch = useDispatch()
 
     return (
@@ -18,8 +18,8 @@ const List = ({ songData, isHideAlbum }) => {
                 dispatch(actions.setRecent({ thumbnail: songData?.thumbnail, title: songData?.title, sid: songData?.encodeId, artists: songData?.artistsNames }))
             }}
         >
-            <div className='flex items-center gap-3 flex-1'>
-                {!isHideAlbum && <span><BsMusicNoteBeamed /></span>}
+            <div className='flex items-center gap-3 flex-auto'>
+                {!isHideNode && <span><BsMusicNoteBeamed /></span>}
                 <img src={songData?.thumbnail} alt='thumbnail' className='w-10 h-10 object-cover rounded-md' />
                 <span className='flex flex-col w-full'>
                     <span className='text-sm font-semibold'>
@@ -28,10 +28,10 @@ const List = ({ songData, isHideAlbum }) => {
                     <span className='text-xs opacity-70'>{songData?.artistsNames}</span>
                 </span>
             </div>
-            {!isHideAlbum && <div className='flex-1 flex justify-center items-center'>
+            {!isHideAlbum && <div className='w-[40%] flex justify-center items-center'>
                 {songData?.album?.title?.length > 20 ? `${songData?.album?.title?.slice(0, 20)}...` : songData?.album?.title}
             </div>}
-            <div className='flex-1 flex justify-end items-center text-xs'>
+            <div className='w-[10%] flex justify-center items-center text-xs'>
                 {moment.utc(songData?.duration * 1000).format('mm:ss')}
             </div>
         </div>

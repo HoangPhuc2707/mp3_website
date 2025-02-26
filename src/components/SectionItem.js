@@ -5,7 +5,7 @@ import { playAlbum } from '../store/actions'
 
 const { AiOutlineHeart, BsFillPlayFill, BsThreeDots } = icons
 
-const SectionItem = ({ data, link, title, thumbnailM, artistsNames, sortDescription }) => {
+const SectionItem = ({ data, link, title, thumbnailM, artistsNames, sortDescription, size }) => {
     const navigate = useNavigate()
     const [isHover, setIsHover] = useState(false)
     const imageRef = useRef()
@@ -25,7 +25,7 @@ const SectionItem = ({ data, link, title, thumbnailM, artistsNames, sortDescript
             onClick={() => {
                 navigate(link?.split('.')[0], { state: { playAlbum: false } })
             }}
-            className='flex flex-col gap-3 flex-auto w-1/5 text-sm cursor-pointer'
+            className={`flex flex-col m-[5px] gap-3 justify-evenly ${size ? size : 'w-[15%]'} text-sm cursor-pointer`}
         >
             <div
                 onMouseEnter={handleHover}

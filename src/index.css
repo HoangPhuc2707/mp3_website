@@ -19,3 +19,8 @@
     -webkit-background-clip: text;
     color: transparent;
 }
+
+.slick-next,
+.slick-prev {
+    display: none !important;
+}

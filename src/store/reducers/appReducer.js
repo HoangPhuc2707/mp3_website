@@ -1,15 +1,15 @@
 import actionTypes from "../actions/actionTypes";
 
 const initState = {
-    banner: [],
-    chill: {},
-    top100: {},
+    banner: null,
+    chill: null,
+    top100: null,
     isLoading: false,
-    newRelease: {},
-    weekChart: [],
-    albumHot: {},
-    chart: {},
-    rank: [],
+    newRelease: null,
+    weekChart: null,
+    albumHot: null,
+    chart: null,
+    rank: null,
 }
 
 const appReducer = (state = initState, action) => {
@@ -18,13 +18,13 @@ const appReducer = (state = initState, action) => {
             return {
                 ...state,
                 banner: action.homeData?.find(item => item.sectionId === 'hSlider')?.items || null,
-                chill: action.homeData?.find(item => item.sectionId === 'hEditorTheme') || {},
-                top100: action.homeData?.find(item => item.sectionId === 'h100') || {},
-                newRelease: action.homeData?.find(item => item.sectionType === 'new-release') || {},
-                weekChart: action.homeData?.find(item => item.sectionType === 'weekChart')?.items || [],
-                albumHot: action.homeData?.find(item => item.sectionId === 'hAlbum') || {},
-                chart: action.homeData?.find(item => item.sectionId === 'hZC')?.chart || {},
-                rank: action.homeData?.find(item => item.sectionId === 'hZC')?.items || [],
+                chill: action.homeData?.find(item => item.sectionId === 'hEditorTheme') || null,
+                top100: action.homeData?.find(item => item.sectionId === 'h100') || null,
+                newRelease: action.homeData?.find(item => item.sectionType === 'new-release') || null,
+                weekChart: action.homeData?.find(item => item.sectionType === 'weekChart')?.items || null,
+                albumHot: action.homeData?.find(item => item.sectionId === 'hAlbum') || null,
+                chart: action.homeData?.find(item => item.sectionId === 'hZC')?.chart || null,
+                rank: action.homeData?.find(item => item.sectionId === 'hZC')?.items || null,
             }
         case actionTypes.LOADING:
             return {
