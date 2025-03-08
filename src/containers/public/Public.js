@@ -2,12 +2,21 @@ import React, { useState } from "react";
 import { Outlet, useParams } from "react-router-dom";
 import { SidebarLeft, SidebarRight, Player, Header, Loading } from "../../components";
 import Scrollbars from 'react-custom-scrollbars-2'
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from '../../store/actions'
 
 const Public = () => {
     const [isShowRightSidebar, setIsShowRightSidebar] = useState(true)
-    const { isLoading } = useSelector(state => state.app)
-    const { singer } = useParams()
+    const { isLoading, scrollTop } = useSelector(state => state.app)
+    const dispatch = useDispatch()
+
+    const handleScrollTop = (e) => {
+        if (e.target.scrollTop === 0) {
+            dispatch(actions.zeroScrollTop(true))
+        } else {
+            dispatch(actions.zeroScrollTop(false))
+        }
+    }
     return (
         <div className="w-full relative h-screen flex flex-col bg-main-100">
             <div className="w-full h-full flex flex-auto">
@@ -18,12 +27,17 @@ const Public = () => {
                     {isLoading && <div className="absolute top-0 left-0 bottom-0 right-0 z-20 bg-white flex items-center justify-center">
                         <Loading />
                     </div>}
-                    <div className={`absolute w-full h-[70px] ${singer ? 'bg-transparent' : 'bg-main-100'} px-[59px] z-50 flex items-center`}>
+                    <div className={`absolute w-full h-[70px] ${scrollTop ? 'bg-transparent' : 'bg-main-100'} px-[59px] z-50 flex items-center`}>
                         <Header />
                     </div>
                     <div className="flex-auto w-full">
-                        <Scrollbars autoHide style={{ width: '100%', height: '100%' }}>
+                        <Scrollbars
+                            onScroll={handleScrollTop}
+                            autoHide
+                            style={{ width: '100%', height: '100%' }}
+                        >
                             <Outlet />
+                            <div className="w-full h-[120px]"></div>
                         </Scrollbars>
                     </div>
                 </div>

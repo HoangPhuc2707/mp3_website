@@ -14,6 +14,10 @@
     text-shadow: 1px 1px 0 #e35050, -1px 1px 0 #e35050, -1px -1px 0 #e35050, 1px -1px 0 #e35050;
 }
 
+.text-shadow-rest {
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5), -1px 1px 0 rgba(0, 0, 0, 0.5), -1px -1px 0 rgba(0, 0, 0, 0.5), 1px -1px 0 rgba(0, 0, 0, 0.5);
+}
+
 .gradient-text {
     background: linear-gradient(90deg, #ff923f, #ff58ab, #b301b3, #6161fd);
     -webkit-background-clip: text;

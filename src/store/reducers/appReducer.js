@@ -10,6 +10,7 @@ const initState = {
     albumHot: null,
     chart: null,
     rank: null,
+    scrollTop: false,
 }
 
 const appReducer = (state = initState, action) => {
@@ -30,6 +31,11 @@ const appReducer = (state = initState, action) => {
             return {
                 ...state,
                 isLoading: action.flag
+            }
+        case actionTypes.ZERO_SCROLLTOP:
+            return {
+                ...state,
+                scrollTop: action.flag
             }
 
         default:

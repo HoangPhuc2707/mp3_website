@@ -123,7 +123,7 @@ const Singer = () => {
                         alt='thumbnail'
                         className='w-[45%] h-[297px] object-cover rounded-md'
                     />
-                    <div className='flex flex-col gap-8 text-sm text-gray-500 font-semibold'>
+                    <div className='flex flex-col gap-3 text-sm text-gray-500 font-semibold'>
                         <p dangerouslySetInnerHTML={{ __html: artistData?.biography }}></p>
                         <div className='flex flex-col gap-2'>
                             <span className='text-[20px] text-black font-bold'>

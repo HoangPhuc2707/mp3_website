@@ -15,7 +15,8 @@ const SearchAll = () => {
                             <img
                                 src={searchData.top.thumbnail}
                                 alt='avatar'
-                                className={`w-[74px] h-[74px] object-cover ${searchData.top.objectType === 'artist' && 'rounded-full'}`} />
+                                className={`w-[74px] h-[74px] object-cover ${searchData.top.objectType === 'artist' && 'rounded-full'}`}
+                            />
                             <div className='flex flex-col text-sm'>
                                 <span className='mb-[4px]'>{searchData.top.objectType === 'artist' ? 'Nghệ sĩ' : searchData.top.objectType === 'song' ? 'Bài hát' : ''}</span>
                                 <span className='text-[16px] font-semibold'>{searchData.top.title || searchData.top.name}</span>
