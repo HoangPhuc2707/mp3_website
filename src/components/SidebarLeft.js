@@ -1,5 +1,6 @@
 import React from 'react'
 import logo from '../assets/images/logo.svg'
+import logoSmall from '../assets/images/logo-small.svg'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { sidebarMenu } from '../ultis/menu'
 import path from '../ultis/path'
@@ -10,8 +11,9 @@ const SidebarLeft = () => {
     const navigate = useNavigate()
     return (
         <div className='flex h-full flex-col bg-main-200'>
-            <div onClick={() => navigate(path.HOME)} className='w-full h-[70px] py-[25px] pl-[20px] flex justify-start items-center cursor-pointer'>
-                <img src={logo} alt='logo' className='w-[120px] h-10' />
+            <div onClick={() => navigate(path.HOME)} className='w-full h-[70px] min-[1024px]:py-[25px] min-[1024px]:pl-[20px] flex justify-center min-[1024px]:justify-start items-center cursor-pointer'>
+                <img src={logo} alt='logo' className='w-[120px] h-10 min-[1024px]:block hidden' />
+                <img src={logoSmall} alt='logoSmall' className='w-[45px] h-[45px] min-[1024px]:hidden' />
             </div>
             <div className='flex flex-col'>
                 {sidebarMenu.map(item => {
@@ -23,7 +25,7 @@ const SidebarLeft = () => {
                             className={({ isActive }) => isActive ? activeStyle : notActiveStyle}
                         >
                             {item.icons}
-                            <span>{item.text}</span>
+                            <span className='min-[1024px]:inline hidden'>{item.text}</span>
                         </NavLink>
                     )
                 })}

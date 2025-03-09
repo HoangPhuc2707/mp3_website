@@ -8,6 +8,7 @@ import * as actions from '../../store/actions'
 const Public = () => {
     const [isShowRightSidebar, setIsShowRightSidebar] = useState(true)
     const { isLoading, scrollTop } = useSelector(state => state.app)
+    const { curSongId } = useSelector(state => state.music)
     const dispatch = useDispatch()
 
     const handleScrollTop = (e) => {
@@ -20,7 +21,7 @@ const Public = () => {
     return (
         <div className="w-full relative h-screen flex flex-col bg-main-100">
             <div className="w-full h-full flex flex-auto">
-                <div className="w-[240px] h-full flex-none bg-main-200">
+                <div className="min-[1024px]:w-[240px] w-[70px] h-full flex-none bg-main-200">
                     <SidebarLeft />
                 </div>
                 <div className="flex-auto relative flex flex-col">
@@ -45,9 +46,9 @@ const Public = () => {
                     <SidebarRight />
                 </div>}
             </div>
-            <div className="fixed z-50 bottom-0 left-0 right-0 h-[80px]">
+            {curSongId && <div className="fixed z-50 bottom-0 left-0 right-0 h-[80px]">
                 <Player setIsShowRightSidebar={setIsShowRightSidebar} />
-            </div>
+            </div>}
         </div>
     )
 }

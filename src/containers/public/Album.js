@@ -67,7 +67,7 @@ const Album = () => {
                     </div>
                 </div>
                 <Scrollbars autoHide style={{ width: '100%', height: '80%' }}>
-                    <div className='flex-auto mb-20'>
+                    <div className='flex-auto mr-4 '>
                         <span>
                             <span className='text-gray-600 text-sm'>Lời tựa </span>
                             <span className='text-sm'>{playlistData?.sortDescription}</span>

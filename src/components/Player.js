@@ -20,9 +20,11 @@ const Player = ({ setIsShowRightSidebar }) => {
     const [repeatMode, setRepeatMode] = useState(0)
     const [isLoadingSource, setIsLoadingSource] = useState(false)
     const [volume, setVolume] = useState(100)
+    const [isHoverVolume, setIsHoverVolume] = useState(false)
     const dispatch = useDispatch()
     const thumbRef = useRef()
     const trackRef = useRef()
+    const volumeRef = useRef()
 
     useEffect(() => {
         const fetchDetailSong = async () => {
@@ -87,6 +89,12 @@ const Player = ({ setIsShowRightSidebar }) => {
         audio.volume = volume / 100
     }, [volume])
 
+    useEffect(() => {
+        if (volumeRef.current) {
+            volumeRef.current.style.cssText = `right : ${100 - volume}%`
+        }
+    }, [volume])
+
     const handleTogglePlayMusic = () => {
         if (isPlaying) {
             audio.pause()
@@ -141,7 +149,7 @@ const Player = ({ setIsShowRightSidebar }) => {
         <div className='bg-main-100 px-5 h-full flex border-t border-solid border-[#e8e8e8]'>
             <div className='w-[30%] flex-auto flex gap-3 items-center'>
                 <img src={songInfo?.thumbnail} alt='thumbnail' className='w-14 h-14 object-cover rounded-md' />
-                <div className='flex flex-col'>
+                <div className='hidden min-[640px]:flex flex-col'>
                     <span className='font-semibold text-gray-700 text-sm'>{songInfo?.title}</span>
                     <span className='text-xs text-gray-500'>{songInfo?.artistsNames}</span>
                 </div>
@@ -153,7 +161,7 @@ const Player = ({ setIsShowRightSidebar }) => {
             <div className='w-[40%] flex-auto flex flex-col gap-2 items-center justify-center py-2'>
                 <div className='flex gap-6 justify-center items-center'>
                     <span
-                        className={`cursor-pointer ${isShuffe && 'text-purple-600'}`}
+                        className={`cursor-pointer ${isShuffe && 'text-main-500'}`}
                         title='Bật phát ngẫu nhiên'
                         onClick={() => setIsShuffe(prev => !prev)}
                     >
@@ -161,14 +169,14 @@ const Player = ({ setIsShowRightSidebar }) => {
                     </span>
                     <span onClick={handlePrevSong} className={`${!songs ? 'text-gray-500' : 'cursor-pointer'}`}><MdSkipPrevious size={23} /></span>
                     <span
-                        className='p-1 cursor-pointer border border-gray-700 hover:text-purple-600 rounded-full'
+                        className='p-1 cursor-pointer border border-gray-700 hover:text-main-500 rounded-full'
                         onClick={handleTogglePlayMusic}
                     >
                         {!isLoadingSource ? <LoadingSong /> : isPlaying ? <BsPauseFill size={24} /> : <BsFillPlayFill size={24} />}
                     </span>
                     <span onClick={handleNextSong} className={`${!songs ? 'text-gray-500' : 'cursor-pointer'}`}><MdSkipNext size={23} /></span>
                     <span
-                        className={`cursor-pointer ${repeatMode && 'text-purple-600'}`}
+                        className={`cursor-pointer ${repeatMode && 'text-main-500'}`}
 
                         onClick={() => setRepeatMode(prev => prev === 2 ? 0 : prev + 1)}
                     >
@@ -187,14 +195,21 @@ const Player = ({ setIsShowRightSidebar }) => {
                     <span>{moment.utc(songInfo?.duration * 1000).format('mm:ss')}</span>
                 </div>
             </div>
-            <div className='w-[30%] flex-auto flex items-center justify-end gap-8'>
-                <div className='flex items-center gap-2'>
+            <div className='w-[30%] hidden flex-auto min-[840px]:flex items-center justify-end gap-8'>
+                <div
+                    className='flex items-center gap-2'
+                    onMouseEnter={() => setIsHoverVolume(true)}
+                    onMouseLeave={() => setIsHoverVolume(false)}
+                >
                     <span className='cursor-pointer' onClick={() => setVolume(prev => +prev === 0 ? 70 : 0)}>
                         {+volume >= 50 ? <SlVolume2 /> : +volume === 0 ? <SlVolumeOff /> : <SlVolume1 />}
                     </span>
+                    <div className={`w-[100px] h-[3px] bg-main-400 rounded-l-full rounded-r-full ${isHoverVolume ? 'hidden' : 'relative'}`}>
+                        <div ref={volumeRef} className='absolute left-0 bottom-0 top-0 bg-main-500 rounded-l-full rounded-r-full'></div>
+                    </div>
                     <input
                         type='range'
-                        className='w-[100px] h-[3px] cursor-pointer'
+                        className={`w-[100px] h-[3px] cursor-pointer ${isHoverVolume ? 'inline' : 'hidden'}`}
                         step={1}
                         min={0}
                         max={100}
@@ -203,7 +218,7 @@ const Player = ({ setIsShowRightSidebar }) => {
                     />
                 </div>
                 <span
-                    className='p-1 rounded-sm cursor-pointer text-white bg-purple-700 opacity-90 hover:opacity-100 '
+                    className='p-1 rounded-sm cursor-pointer text-white bg-main-500 opacity-90 hover:opacity-100 '
                     onClick={() => setIsShowRightSidebar(prev => !prev)}
                 >
                     <BsMusicNoteList size={15} />

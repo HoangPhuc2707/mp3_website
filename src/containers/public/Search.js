@@ -28,7 +28,6 @@ const Search = () => {
                 <div className='w-full'>
                     <Outlet />
                 </div>
-                <div className='w-full h-[120px]'></div>
             </div>
         </>
     )

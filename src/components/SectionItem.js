@@ -25,7 +25,7 @@ const SectionItem = ({ data, link, title, thumbnailM, artistsNames, sortDescript
             onClick={() => {
                 navigate(link?.split('.')[0], { state: { playAlbum: false } })
             }}
-            className={`flex flex-col m-[5px] gap-3 justify-evenly ${size ? size : 'w-[15%]'} text-sm cursor-pointer`}
+            className={`flex flex-col m-[5px] gap-3 justify-evenly ${size ? size : 'w-[22%]'} text-sm cursor-pointer`}
         >
             <div
                 onMouseEnter={handleHover}

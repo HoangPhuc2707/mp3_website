@@ -94,15 +94,15 @@ const ChartSection = () => {
     }, [chart])
 
     return (
-        <div className='px-[59px] mt-12 relative max-h-[400px]'>
-            <img src={bgChart} alt='bg-chart' className='w-full object-cover rounded-md max-h-[400px]' />
+        <div className='px-[59px] mt-12 relative min-[1200px]:max-h-[400px] h-[760px]'>
+            <img src={bgChart} alt='bg-chart' className='w-full object-cover rounded-md min-[1200px]:max-h-[400px] h-[760px]' />
             <div className='absolute z-10 top-0 left-[59px] right-[59px] bottom-0 bg-[rgba(77,34,104,0.9)] rounded-md'></div>
             <div className='absolute z-20 top-0 left-[59px] right-[59px] bottom-0 p-5 flex flex-col gap-4'>
                 <Link to={path.ZING_CHART} className='w-[160px] flex gap-2 items-center'>
                     <h3 className='text-2xl gradient-text font-bold'>#zingchart</h3>
                     <span className='p-1 rounded-full bg-white hover:bg-main-300'><BsFillPlayFill size={16} /></span>
                 </Link>
-                <div className='flex gap-4 h-full'>
+                <div className='min-[1200px]:flex-row flex flex-col gap-4 h-full'>
                     <div className='flex-4 flex flex-col gap-4'>
                         {rank?.slice(0, 3)?.map((item, index) => {
                             return (
@@ -118,11 +118,13 @@ const ChartSection = () => {
                                 />
                             )
                         })}
-                        <Link to={path.ZING_CHART} className='text-white px-4 py-[2px] m-auto rounded-l-full rounded-r-full
-                        border border-white w-fit'
-                        >Xem thêm</Link>
+                        <Link to={path.ZING_CHART}
+                            className='text-white px-4 py-[2px] m-auto rounded-l-full rounded-r-full border border-white w-fit'
+                        >
+                            Xem thêm
+                        </Link>
                     </div>
-                    <div className='flex-6 h-[90%] relative'>
+                    <div className='flex-6 order-first min-[1200px]:order-last min-[1200px]:w-[500px] h-[90%] relative'>
                         {data && <Line data={data} ref={chartRef} options={options} />}
                         <div
                             className='tool-tip'
