@@ -99,7 +99,7 @@ const Singer = () => {
                 </div>
             </div>
             {artistData?.sections?.filter(item => item.sectionType === 'playlist')?.map((item, index) => (
-                <Section key={index} data={item} />
+                <Section key={index} data={item} sizeSectionSinger='w-[25%]' />
             ))}
             <div className='flex flex-col w-full px-[60px] mt-12'>
                 <h3 className='text-lg font-bold mb-5'>{artistData?.sections?.find(item => item.sectionType === 'artist')?.title}</h3>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { SectionItem } from './'
 import { useSelector } from 'react-redux'
 
-const Section = ({ data }) => {
+const Section = ({ data, sizeSectionSinger }) => {
     const { currentWidth } = useSelector(state => state.app)
     const navigate = useNavigate()
     return (
@@ -22,7 +22,7 @@ const Section = ({ data }) => {
                             link={item.link}
                             sortDescription={item.sortDescription}
                             thumbnailM={item.thumbnailM}
-                            size='flex-1'
+                            size={sizeSectionSinger ? sizeSectionSinger : 'flex-1'}
                         />
                     )
                 })}

@@ -34,14 +34,14 @@ const Album = () => {
         if (location.state?.playAlbum) {
             const randomSong = Math.round(Math.random() * playlistData?.song?.items?.length) - 1
             dispatch(actions.setCurSongId(playlistData?.song?.items[randomSong]?.encodeId))
-            dispatch(actions.play(true))
+            // dispatch(actions.play(true))
         }
     }, [pid, playlistData])
 
     return (
         <>
             <div className='w-full h-[70px]'></div>
-            <div className='flex gap-8 w-full h-full px-[39px]'>
+            <div className='flex gap-8 w-full h-[560px] px-[39px]'>
                 <div className='flex-none w-1/3 flex flex-col gap-2 items-center'>
                     <div className='w-full relative overflow-hidden'>
                         <img

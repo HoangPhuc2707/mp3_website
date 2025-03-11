@@ -38,7 +38,7 @@ function App() {
   }, [currentWidth])
   return (
     <>
-      <div className="">
+      <div>
         <Routes>
           <Route path={path.PUBLIC} element={<Public />}>
             <Route path={path.HOME} element={<Home />} />

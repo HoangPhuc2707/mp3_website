@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as actions from '../../store/actions'
 
 const Public = () => {
-    const [isShowRightSidebar, setIsShowRightSidebar] = useState(true)
+    const [isShowRightSidebar, setIsShowRightSidebar] = useState(false)
     const { isLoading, scrollTop } = useSelector(state => state.app)
     const { curSongId } = useSelector(state => state.music)
     const dispatch = useDispatch()
@@ -38,7 +38,7 @@ const Public = () => {
                             style={{ width: '100%', height: '100%' }}
                         >
                             <Outlet />
-                            <div className="w-full h-[120px]"></div>
+                            <div className="w-full h-[100px]"></div>
                         </Scrollbars>
                     </div>
                 </div>
