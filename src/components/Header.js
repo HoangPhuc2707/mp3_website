@@ -2,6 +2,7 @@ import React from 'react'
 import icons from '../ultis/icons'
 import Search from './Search'
 import { useNavigate, useParams } from 'react-router-dom'
+import avatar from '../assets/images/avata.jpg'
 
 const { HiArrowNarrowLeft, HiArrowNarrowRight } = icons
 const Header = () => {
@@ -18,7 +19,9 @@ const Header = () => {
                     <Search />
                 </div>
             </div>
-            <div>login</div>
+            <div className='w-[45px]'>
+                <img src={avatar} alt='avatar' className='w-[40px] h-[40px] object-cover rounded-full' />
+            </div>
         </div>
     )
 }

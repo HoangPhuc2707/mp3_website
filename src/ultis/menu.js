@@ -18,11 +18,11 @@ export const sidebarMenu = [
         text: '#zingchart',
         icons: <FaRegChartBar size={24} />
     },
-    {
-        path: 'follow',
-        text: 'Theo dõi',
-        icons: <RiChatFollowUpLine size={24} />
-    },
+    // {
+    //     path: 'myfollow',
+    //     text: 'Theo dõi',
+    //     icons: <RiChatFollowUpLine size={24} />
+    // },
 ]
 
 export const searchMenu = [

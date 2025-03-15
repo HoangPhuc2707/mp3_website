@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import icons from '../ultis/icons'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { SongItem } from './'
 import { apiGetDetailPlaylist } from '../apis'
 import Scrollbars from 'react-custom-scrollbars-2'
+import * as actions from '../store/actions'
 
 const { RiDeleteBinFill } = icons
 const SidebarRight = () => {
     const [isRecent, setIsRecent] = useState(false)
     const [playlist, setPlaylist] = useState()
     const { curSongData, curAlbumId, isPlaying, recentSongs, curSongId } = useSelector(state => state.music)
+    const dispatch = useDispatch()
 
     const fetchDetailPlaylist = async () => {
         const response = await apiGetDetailPlaylist(curAlbumId)
@@ -47,7 +49,14 @@ const SidebarRight = () => {
                         Nghe gần đây
                     </span>
                 </div>
-                <span className='p-2 rounded-full cursor-pointer bg-main-100 hover:bg-main-500 hover:text-white'><RiDeleteBinFill size={16} /></span>
+                <span
+                    className='p-2 rounded-full cursor-pointer bg-main-100 hover:bg-main-500 hover:text-white'
+                    onClick={() => {
+                        dispatch(actions.clearRecent())
+                    }}
+                >
+                    <RiDeleteBinFill size={16} />
+                </span>
             </div>
             {isRecent ?
                 <div className='w-full flex-auto flex flex-col px-2'>

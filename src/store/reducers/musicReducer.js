@@ -9,7 +9,7 @@ const initState = {
     curAlbumId: null,
     recentSongs: [],
     searchData: {},
-    keyword: ''
+    keyword: '',
 }
 
 const musicReducer = (state = initState, action) => {
@@ -64,6 +64,11 @@ const musicReducer = (state = initState, action) => {
                 ...state,
                 searchData: action.data || {},
                 keyword: action.keyword || ''
+            }
+        case actionTypes.CLEAR_RECENT:
+            return {
+                ...state,
+                recentSongs: []
             }
 
         default:

@@ -1,6 +1,6 @@
 import { MdOutlineLibraryMusic, MdSkipNext, MdSkipPrevious } from "react-icons/md";
 import { TbChartArcs } from "react-icons/tb";
-import { FaRegChartBar } from "react-icons/fa";
+import { FaRegChartBar, FaHeart } from "react-icons/fa";
 import { RiChatFollowUpLine, RiDeleteBinFill } from "react-icons/ri";
 import { AiOutlineArrowLeft, AiOutlineArrowRight, AiFillHeart, AiOutlineHeart, AiOutlineUserAdd } from "react-icons/ai";
 import { HiArrowNarrowLeft, HiArrowNarrowRight } from "react-icons/hi";
@@ -39,7 +39,8 @@ const icons = {
     SlVolume1,
     RiDeleteBinFill,
     AiOutlineUserAdd,
-    GrClose
+    GrClose,
+    FaHeart
 }
 
 export default icons

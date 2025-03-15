@@ -9,7 +9,7 @@ import { LoadingSong } from './'
 
 const { AiFillHeart, AiOutlineHeart, BsThreeDots, MdSkipNext, MdSkipPrevious,
     CiRepeat, CiShuffle, BsFillPlayFill, BsPauseFill, TbRepeatOnce, BsMusicNoteList,
-    SlVolume1, SlVolume2, SlVolumeOff } = icons
+    SlVolume1, SlVolume2, SlVolumeOff, FaHeart } = icons
 var intervalId
 const Player = ({ setIsShowRightSidebar }) => {
     const { curSongId, isPlaying, songs } = useSelector(state => state.music)
@@ -19,7 +19,7 @@ const Player = ({ setIsShowRightSidebar }) => {
     const [isShuffe, setIsShuffe] = useState(false)
     const [repeatMode, setRepeatMode] = useState(0)
     const [isLoadingSource, setIsLoadingSource] = useState(false)
-    const [volume, setVolume] = useState(100)
+    const [volume, setVolume] = useState(50)
     const [isHoverVolume, setIsHoverVolume] = useState(false)
     const dispatch = useDispatch()
     const thumbRef = useRef()
@@ -154,7 +154,7 @@ const Player = ({ setIsShowRightSidebar }) => {
                     <span className='text-xs text-gray-500'>{songInfo?.artistsNames}</span>
                 </div>
                 <div className='flex gap-4 pl-2'>
-                    <span><AiOutlineHeart size={16} /></span>
+                    <span><AiOutlineHeart size={16} /> </span>
                     <span><BsThreeDots size={16} /></span>
                 </div>
             </div>

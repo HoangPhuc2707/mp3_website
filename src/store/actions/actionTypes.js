@@ -6,6 +6,7 @@ const actionTypes = {
     SET_CUR_ALBUM_ID: 'SET_CUR_ALBUM_ID',
     SET_RECENT: 'SET_RECENT',
     CURRENT_WIDTH: 'CURRENT_WIDTH',
+    CLEAR_RECENT: 'CLEAR_RECENT',
 
     //Music
     PLAY: 'PLAY',

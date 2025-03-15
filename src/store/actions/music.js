@@ -85,3 +85,10 @@ export const getSearchSongs = (singerId) => async (dispatch) => {
         })
     }
 }
+
+export const clearRecent = () => ({
+    type: actionTypes.CLEAR_RECENT,
+})
+
+
+

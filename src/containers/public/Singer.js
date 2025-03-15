@@ -3,10 +3,12 @@ import { useParams } from 'react-router-dom'
 import { apiGetArtist } from '../../apis'
 import icons from '../../ultis/icons'
 import { SongItem, Section, Artist } from '../../components'
+import { useSelector } from 'react-redux'
 
 const { AiOutlineUserAdd, BsFillPlayFill } = icons
 
 const Singer = () => {
+    const { currentWidth } = useSelector(state => state.app)
     const { singer } = useParams()
     const [artistData, setArtistData] = useState(null)
     const ref = useRef()
@@ -35,7 +37,7 @@ const Singer = () => {
                         </div>
                         <div className=' flex flex-col gap-4'>
                             <div className='flex gap-6 items-center'>
-                                <h1 className='text-[60px] font-bold'>{artistData?.name}</h1>
+                                <h1 className={`${currentWidth > 840 ? 'text-[60px]' : 'text-[40px]'}  font-bold`}>{artistData?.name}</h1>
                                 <span className='p-2 rounded-full bg-main-500 hover:bg-[#0c6b6b]'><BsFillPlayFill size={32} color='white' className='pl-[3px]' /></span>
                             </div>
                             <div className='flex items-center gap-8'>
@@ -104,7 +106,7 @@ const Singer = () => {
             <div className='flex flex-col w-full px-[60px] mt-12'>
                 <h3 className='text-lg font-bold mb-5'>{artistData?.sections?.find(item => item.sectionType === 'artist')?.title}</h3>
                 <div className='flex gap-7'>
-                    {artistData?.sections?.find(item => item.sectionType === 'artist')?.items?.slice(0, 5)?.map(item => (
+                    {artistData?.sections?.find(item => item.sectionType === 'artist')?.items?.filter((item, index) => index <= (currentWidth < 600 ? 2 : currentWidth < 800 ? 3 : 4))?.map(item => (
                         <Artist
                             key={item.id}
                             title={item.name}

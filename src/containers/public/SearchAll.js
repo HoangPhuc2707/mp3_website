@@ -5,6 +5,7 @@ import { SongItem, List, SectionItem, Artist } from '../../components'
 
 const SearchAll = () => {
     const { searchData } = useSelector(state => state.music)
+    const { currentWidth } = useSelector(state => state.app)
     return (
         <div className='w-full flex flex-col px-[60px] gap-8'>
             <div className='flex flex-col'>
@@ -31,7 +32,7 @@ const SearchAll = () => {
                                     </span>}
                             </div>
                         </div>}
-                    {searchData?.songs?.filter((item, index) => [...Array(2).keys()].some(i => i === index))?.map(item => (
+                    {(currentWidth > 800) && searchData?.songs?.filter((item, index) => [...Array(2).keys()].some(i => i === index))?.map(item => (
                         <div key={item.encodeId} className='flex-1'>
                             <SongItem
                                 thumbnail={item.thumbnail}
@@ -73,7 +74,7 @@ const SearchAll = () => {
             <div className='flex flex-col w-full'>
                 <h3 className='text-lg font-bold mb-5'>Nghệ sĩ</h3>
                 <div className='flex gap-7'>
-                    {searchData?.artists?.slice(0, 5)?.map(item => (
+                    {searchData?.artists?.filter((item, index) => index <= (currentWidth < 600 ? 2 : currentWidth < 800 ? 3 : 4))?.map(item => (
                         <Artist
                             key={item.id}
                             title={item.name}
